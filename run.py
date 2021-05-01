@@ -1,11 +1,8 @@
 from remind_me import Application
-
-import tkinter as tk
-
+   
 
 def main():
-    root = tk.Tk()
-    app = Application(master=root)
+    app = Application()
     app.mainloop()
 
 
