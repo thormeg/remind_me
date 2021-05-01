@@ -9,4 +9,4 @@ From the command line execute:
 >$ python run.py
 
 # Plans
-Expand UI components.
+Rewrite in PyQT.
