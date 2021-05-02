@@ -21,27 +21,27 @@ class Application(tk.Tk):
         self.parent = tk.Frame(self)
         self.create_grid_widgets()
 
-        self.parent.grid()
+        self.parent.pack(side='top')
 
     def build_notification_list(self, k, notification_list, i):
         bgc = "#e54624" if i & 1 == 1 else "#40bf77"
         self.key = tk.Label(self, bg="white", fg=bgc)
         self.key["text"] = k
-        self.key.grid(column=0, row=i, padx=10, pady=5, sticky=tk.W)
+        self.key.pack()
 
-        self.value = tk.Label(self, bg="white", fg=bgc)
+        self.value = tk.Label(self, bg="white", fg=bgc, pady=15)
         self.value["text"] = notification_list[k]
-        self.value.grid(column=1, row=i, padx=10, pady=5, sticky=tk.E)
+        self.value.pack()
 
     def build_no_notifications(self):
         self.title = tk.Label(self, bg="white")
         self.title["text"] = "No events this time!"
-        self.title.grid(column=0, row=1, padx=10, pady=5, sticky=tk.N)
+        self.title.pack()
 
     def create_grid_widgets(self):
-        self.title = tk.Label(self, bg="white")
+        self.title = tk.Label(self, bg="white", pady=10)
         self.title["text"] = "My upcoming events:"
-        self.title.grid(column=0, row=0, padx=10, pady=5, sticky=tk.N)
+        self.title.pack()
 
         notification_list = self.calculate_notifications()
 
@@ -53,26 +53,30 @@ class Application(tk.Tk):
                 self.build_notification_list(k, notification_list, i)
                 i += 1
 
+
+        # Second frame
+        self.data_frame = tk.Frame(self)
+        self.data_frame.configure(bg='white')
+        self.data_frame.pack(side='bottom')
+
         # Dates entry box
         self.dates_entry = tk.Text(
-            self.parent, bg="white", fg="black", height=5, width=50, relief="flat", bd=0
+            self.data_frame, bg="white", fg="black", height=10, width=50, relief="solid", bd=0
         )
 
-        self.dates_entry.grid(
-            column=1, row=i, padx=10, pady=15, rowspan=2, columnspan=5
-        )
+        self.dates_entry.pack(expand=True)
         self.populate_text_area()
 
         self.save_dates = tk.Button(
-            self.parent, bg="white", text="Save", command=self.save_dates
+            self.data_frame, bg="white", text="Save", command=self.save_dates
         )
-        self.save_dates.grid(column=1, row=i+2, pady=10, padx=10, sticky=tk.S)
+        self.save_dates.pack(side='right')
 
         # Quit button
         self.quit = tk.Button(
-            self, text="Quit", fg="red", bg="white", command=self.destroy
+            self.data_frame, text="Quit", fg="red", bg="white", command=self.destroy
         )
-        self.quit.grid(column=0, row=i + 2, pady=10, sticky=tk.S)
+        self.quit.pack(side='left')
 
     def save_dates(self):
         text = self.dates_entry.get(1.0, tk.END).strip()
