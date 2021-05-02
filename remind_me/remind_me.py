@@ -21,7 +21,7 @@ class Application(tk.Tk):
         self.parent = tk.Frame(self)
         self.create_grid_widgets()
 
-        self.parent.pack(side='top')
+        self.parent.pack(side="top")
 
     def build_notification_list(self, k, notification_list, i):
         bgc = "#e54624" if i & 1 == 1 else "#40bf77"
@@ -53,15 +53,20 @@ class Application(tk.Tk):
                 self.build_notification_list(k, notification_list, i)
                 i += 1
 
-
         # Second frame
         self.data_frame = tk.Frame(self)
-        self.data_frame.configure(bg='white')
-        self.data_frame.pack(side='bottom')
+        self.data_frame.configure(bg="white")
+        self.data_frame.pack(side="bottom")
 
         # Dates entry box
         self.dates_entry = tk.Text(
-            self.data_frame, bg="white", fg="black", height=10, width=50, relief="solid", bd=0
+            self.data_frame,
+            bg="white",
+            fg="black",
+            height=10,
+            width=50,
+            relief="solid",
+            bd=0,
         )
 
         self.dates_entry.pack(expand=True)
@@ -70,13 +75,13 @@ class Application(tk.Tk):
         self.save_dates = tk.Button(
             self.data_frame, bg="white", text="Save", command=self.save_dates
         )
-        self.save_dates.pack(side='right')
+        self.save_dates.pack(side="right")
 
         # Quit button
         self.quit = tk.Button(
             self.data_frame, text="Quit", fg="red", bg="white", command=self.destroy
         )
-        self.quit.pack(side='left')
+        self.quit.pack(side="left")
 
     def save_dates(self):
         text = self.dates_entry.get(1.0, tk.END).strip()
