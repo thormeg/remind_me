@@ -4,6 +4,7 @@ from tkinter.ttk import Notebook
 
 import requests
 
+
 class TranslateBook(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -27,20 +28,26 @@ class TranslateBook(tk.Tk):
         self.french_translation = tk.StringVar(french_tab)
         self.french_translation.set("")
 
-        self.translate_button = tk.Button(english_tab,
-                                          text="Translate",
-                                          command=lambda langs=["fr"],
-                                                         elems=[self.french_translation]:
-                                                            self.translate(langs, None, elems))
+        self.translate_button = tk.Button(
+            english_tab,
+            text="Translate",
+            command=lambda langs=["fr"], elems=[
+                self.french_translation
+            ]: self.translate(langs, None, elems),
+        )
         self.translate_button.pack(side=tk.BOTTOM, fill=tk.X)
 
         self.english_entry = tk.Text(english_tab, bg="white", fg="black")
         self.english_entry.pack(side=tk.TOP, expand=1)
 
-        self.french_copy_button = tk.Button(french_tab, text="Copy to Clipboard", command=self.copy_to_clipboard)
+        self.french_copy_button = tk.Button(
+            french_tab, text="Copy to Clipboard", command=self.copy_to_clipboard
+        )
         self.french_copy_button.pack(side=tk.BOTTOM, fill=tk.X)
 
-        self.french_label = tk.Label(french_tab, textvar=self.french_translation, bg="lightgrey", fg="black")
+        self.french_label = tk.Label(
+            french_tab, textvar=self.french_translation, bg="lightgrey", fg="black"
+        )
         self.french_label.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
         self.notebook.add(english_tab, text="English")
@@ -67,7 +74,6 @@ class TranslateBook(tk.Tk):
                 element.set(translation)
         except Exception as e:
             msg.showerror("Translation Failed", str(e))
-
 
     def copy_to_clipboard(self, text=None):
         if not text:

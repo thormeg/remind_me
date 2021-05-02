@@ -1,8 +1,8 @@
-from remind_me import Application
-   
+from remind_me import create_app
+
 
 def main():
-    app = Application()
+    app = create_app()
     app.mainloop()
 
 
