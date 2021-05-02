@@ -5,4 +5,4 @@ env:
 	env/bin/pip install -r requirements.txt -r requirements-dev.txt
 
 lint:
-	env/bin/flake8
+	env/bin/black .
